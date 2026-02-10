@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
-const API_BASE = "/api";
+/** Same-origin in dev (Vite proxy). In production (e.g. Vercel), set VITE_API_URL to your backend base (e.g. https://api.example.com/api). */
+const API_BASE = (import.meta.env.VITE_API_URL ?? "/api").replace(/\/$/, "");
 
 // Auth types (defined early so interceptors can reference them)
 export interface TokenResponse {

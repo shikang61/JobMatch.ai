@@ -185,6 +185,26 @@ job-match-platform/
 
 ---
 
+## Deploying frontend to Vercel
+
+If you deploy only the **frontend** to Vercel, the app must call your **backend API** (hosted elsewhere). Otherwise register/login and all API calls will fail.
+
+1. **Deploy the backend** somewhere that exposes HTTPS (e.g. Railway, Render, Fly.io, or a VPS). Ensure it has a public URL, e.g. `https://your-backend.railway.app`.
+
+2. **In Vercel (Project → Settings → Environment Variables)** add:
+   - **Name:** `VITE_API_URL`  
+   - **Value:** Your backend API base URL including the `/api` path, e.g. `https://your-backend.railway.app/api`  
+   - Redeploy the frontend after adding the variable (builds bake in `VITE_*` at build time).
+
+3. **Backend CORS:** On the backend server, set `CORS_ORIGINS` to include your Vercel frontend origin so the browser allows requests:
+   - Example: `CORS_ORIGINS=["https://your-app.vercel.app"]`  
+   - For multiple origins: `CORS_ORIGINS=["https://your-app.vercel.app","http://localhost:3000"]`  
+   - In `.env` you can use JSON: `CORS_ORIGINS=["https://your-app.vercel.app"]`
+
+Without `VITE_API_URL`, the frontend calls `/api` on the Vercel domain, where no backend runs, so register and other API calls return 404 or fail.
+
+---
+
 ## Troubleshooting
 
 - **“Connection refused” at startup**  
