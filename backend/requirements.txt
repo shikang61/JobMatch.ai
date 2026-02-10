@@ -1,0 +1,39 @@
+# FastAPI and server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+
+# Database
+sqlalchemy[asyncio]>=2.0.25
+asyncpg>=0.29.0
+
+# Config and validation
+pydantic[email]>=2.5.0
+pydantic-settings>=2.1.0
+email-validator>=2.1.0
+
+# Auth
+bcrypt>=4.1.0
+python-jose[cryptography]>=3.3.0
+
+# File upload and parsing
+python-multipart>=0.0.6
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+
+# HTTP and scraping
+httpx>=0.26.0
+beautifulsoup4>=4.12.0
+requests-html>=0.10.0
+
+# OpenAI
+openai>=1.12.0
+
+# Redis (optional for cache)
+redis>=5.0.0
+
+# Utils
+python-dotenv>=1.0.0
+
+# Tests
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
