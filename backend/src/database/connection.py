@@ -27,8 +27,22 @@ class Base(DeclarativeBase):
 def get_engine():
     """Create async engine with connection pool settings."""
     settings = get_settings()
+    db_url = settings.database_url
+
+    # Validate DATABASE_URL is properly set
+    if not db_url or db_url == "postgresql+asyncpg://user:password@localhost:5432/jobmatch":
+        error_msg = (
+            "DATABASE_URL is not properly configured. "
+            "In Railway, set: DATABASE_URL=${{Postgres.DATABASE_URL}} "
+            f"(Current value: {db_url})"
+        )
+        logger.error(error_msg)
+        raise ValueError(error_msg)
+
+    logger.info(f"Connecting to database: {db_url.split('@')[1] if '@' in db_url else 'unknown'}")
+
     return create_async_engine(
-        settings.database_url,
+        db_url,
         pool_size=10,
         max_overflow=5,
         pool_pre_ping=True,
