@@ -29,7 +29,7 @@ class Settings(BaseSettings):
         default=None,
         description="Sync URL for migrations (postgresql:// without asyncpg)",
     )
-    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis URL")
+    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis URL (optional)")
 
     @field_validator("database_url", mode="before")
     @classmethod

@@ -1,3 +1,4 @@
 .env
 .env.local
 RAILWAY_ENV_SETUP.md
+DEPLOY_TO_RAILWAY.md
